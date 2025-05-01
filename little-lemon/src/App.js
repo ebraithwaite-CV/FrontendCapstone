@@ -1,3 +1,4 @@
+import './layout.css'; // Import the CSS file
 import './App.css';
 import Header from './Header';
 import Main from './Main';

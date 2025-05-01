@@ -1,0 +1,117 @@
+/* Header.css */
+:root {
+    --primary-yellow: #F4CE14;
+    --primary-dark: #333333;
+    --background-dark: #495E57;
+    --background-light: #EDEFEE;
+    --text-light: #FFFFFF;
+    --text-dark: #333333;
+  }
+  
+  .header {
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  
+  .logo {
+    height: 50px;
+    width: auto;
+  }
+  
+  /* Mobile Menu Button */
+  .mobile-menu-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+  }
+  
+  .hamburger {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--primary-dark);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+  
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+  }
+  
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+  }
+  
+  /* Mobile Navigation */
+  .mobile-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-200%);
+    visibility: hidden;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0s linear 0.3s;
+    z-index: 999;
+    height: auto;
+    overflow-y: auto;
+  }
+  
+  .mobile-nav.open {
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0s linear 0s;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .header {
+      padding: 0.5rem 0;
+    }
+    
+    .logo {
+      height: 40px;
+    }
+    
+    .mobile-nav {
+      position: absolute;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+  }
+  

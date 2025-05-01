@@ -1,0 +1,165 @@
+/* Main.css */
+:root {
+    --primary-yellow: #F4CE14;
+    --primary-dark: #333333;
+    --background-dark: #495E57;
+    --background-light: #EDEFEE;
+    --text-light: #FFFFFF;
+    --text-dark: #333333;
+  }
+  
+  .main {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Hero Section */
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+  }
+  
+  .hero-content {
+    flex: 1;
+    padding-right: 2rem;
+  }
+  
+  .restaurant-name {
+    font-size: 3rem;
+    margin: 0;
+    color: var(--primary-yellow);
+  }
+  
+  .restaurant-location {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-weight: normal;
+  }
+  
+  .restaurant-description {
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  
+  .reserve-button {
+    background-color: var(--primary-yellow);
+    color: var(--primary-dark);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 16px;
+    cursor: pointer;
+  }
+  
+  .hero-image {
+    flex: 1;
+    text-align: right;
+  }
+  
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+    max-height: 300px;
+    object-fit: cover;
+  }
+  
+  /* Specials Section */
+  .specials {
+    padding: 1rem 0 3rem;
+  }
+  
+  .specials-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .specials-header h2 {
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  .menu-button {
+    background-color: var(--primary-yellow);
+    color: var(--primary-dark);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 16px;
+    cursor: pointer;
+  }
+  
+  .specials-cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  
+  .special-card {
+    flex: 1;
+    background-color: var(--background-light);
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .special-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .special-content {
+    padding: 1.5rem;
+  }
+  
+  .special-title-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .special-title-price h3 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  
+  .price {
+    color: #EE9972;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .special-description {
+    color: #495E57;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+  
+  .order-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .order-link p {
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .delivery-icon {
+    font-size: 1.25rem;
+  }

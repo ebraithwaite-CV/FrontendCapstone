@@ -1,21 +1,22 @@
 import React from 'react';
+import './Nav.css';
 
-function Nav() {
+function Nav({ isMobile, closeMenu }) {
+  const handleLinkClick = () => {
+    if (isMobile && closeMenu) {
+      closeMenu();
+    }
+  };
+
   return (
-    <nav className="nav">
-      <ul className="nav-links" style={{
-        display: 'flex',
-        listStyleType: 'none',
-        margin: 0,
-        padding: 0,
-        gap: '20px'
-      }}>
-        <li><a href="/">Home</a></li>
-        <li><a href="/menu">Menu</a></li>
-        <li><a href="/reservations">Reservations</a></li>
-        <li><a href="/order-online">Order Online</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
+    <nav className={`nav ${isMobile ? 'mobile' : ''}`}>
+      <ul className="nav-links">
+        <li><a href="/" onClick={handleLinkClick}>Home</a></li>
+        <li><a href="/about" onClick={handleLinkClick}>About</a></li>
+        <li><a href="/menu" onClick={handleLinkClick}>Menu</a></li>
+        <li><a href="/reservations" onClick={handleLinkClick}>Reservations</a></li>
+        <li><a href="/order-online" onClick={handleLinkClick}>Order Online</a></li>
+        <li><a href="/login" onClick={handleLinkClick}>Login</a></li>
       </ul>
     </nav>
   );
