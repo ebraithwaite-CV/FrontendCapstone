@@ -1,10 +1,11 @@
 import React from 'react';
 import BookingForm from './BookingForm';
 import './BookingForm.css';
+import './BookingPage.css';
 
 function BookingPage({ availableTimes, updateTimes, submitBooking }) {
   return (
-    <div className="booking-page" style={{ textAlign: 'center' }}>
+    <div className="booking-page">
       <div className="booking-hero">
         <h1>Reserve a Table</h1>
         <p>Please fill out the form below to book your reservation at Little Lemon.</p>

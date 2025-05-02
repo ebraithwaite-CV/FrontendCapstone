@@ -1,56 +1,67 @@
-.booking-form {
-    max-width: 360px;
+/* BookingForm.css with accessibility enhancements */
+
+.reservation-section {
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    font-family: Arial, sans-serif;
-    text-align: center;
   }
   
-  .booking-form h1 {
+  .booking-form {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #booking-form-title {
+    color: #495E57;
     text-align: center;
-    margin-bottom: 24px;
-    font-size: 24px;
-    font-weight: bold;
+    margin-bottom: 30px;
+    font-size: 2rem;
   }
   
   .form-field {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-    text-align: left; /* Keep form fields left-aligned for better readability */
+    margin-bottom: 20px;
   }
   
-  .form-field label {
-    flex: 0 0 140px;
-    color: #4B6A1D;
-    font-weight: bold;
-    font-size: 18px;
+  /* Improved focus styles for better accessibility */
+  input:focus,
+  select:focus,
+  textarea:focus,
+  .booking-slot:focus {
+    outline: 2px solid #495E57;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(73, 94, 87, 0.25);
   }
   
-  .form-field input,
-  .form-field select,
-  .form-field textarea {
-    flex: 1;
-    padding: 8px 12px;
+  /* Make sure focus is visible for keyboard navigation */
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  .booking-slot:focus-visible {
+    outline: 3px solid #F4CE14;
+    outline-offset: 2px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  input, select, textarea {
+    width: 100%;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
   }
   
-  .form-field textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  
+  /* Date input container */
   .date-input-container {
     position: relative;
-    flex: 1;
-    display: flex;
-  }
-  
-  .date-input-container input {
-    flex: 1;
   }
   
   .calendar-icon {
@@ -61,89 +72,183 @@
     pointer-events: none;
   }
   
-  /* Styling for booking slots */
-  .available-slots {
-    margin: 20px 0;
-    text-align: center;
+  /* Time selection */
+  .selected-time {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
   }
   
-  .available-slots h3 {
-    color: #4B6A1D;
+  /* Available time slots */
+  .available-slots {
+    margin-bottom: 25px;
+    border: none;
+    padding: 0;
+  }
+  
+  .available-slots legend {
+    font-weight: 500;
     margin-bottom: 10px;
+    font-size: 1rem;
   }
   
   .slots-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 10px;
-    margin-bottom: 20px;
   }
   
   .booking-slot {
-    padding: 8px 12px;
-    background-color: #EDEFEE;
+    padding: 10px 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
+    background-color: #fff;
   }
   
+  /* Improved visual cues for interactive elements */
   .booking-slot:hover {
-    background-color: #F4CE14;
+    background-color: #f0f8ff;
+    border-color: #495E57;
   }
   
   .booking-slot.selected {
     background-color: #495E57;
     color: white;
-    font-weight: bold;
+    border-color: #495E57;
   }
   
+  /* Special Requests character count */
+  .char-count {
+    text-align: right;
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 4px;
+  }
+  
+  /* Reserve button */
   .reserve-button {
-    display: block;
-    width: 150px;
-    margin: 24px auto 0;
-    padding: 12px;
-    background-color: #F3C622;
-    color: black;
+    background-color: #F4CE14;
+    color: #333;
     border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 16px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
     cursor: pointer;
-    text-transform: uppercase;
-  }
-  
-  .reserve-button:hover {
-    background-color: #e0b620;
-  }
-  
-  /* Override default date input styling */
-  input[type="date"]::-webkit-calendar-picker-indicator {
-    opacity: 0;
+    transition: background-color 0.3s ease;
     width: 100%;
-    height: 100%;
+    margin-top: 20px;
+  }
+  
+  .reserve-button:hover:not(:disabled) {
+    background-color: #E4BD04;
+  }
+  
+  .reserve-button:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+  
+  .reserve-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  
+  /* Form validation styles */
+  .field-error label {
+    color: #D32F2F;
+  }
+  
+  .field-error input,
+  .field-error select,
+  .field-error textarea {
+    border-color: #D32F2F;
+    background-color: rgba(211, 47, 47, 0.05);
+  }
+  
+  .error-message {
+    color: #D32F2F;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    margin-bottom: 0;
+  }
+  
+  /* Detail list layout for better semantics */
+  .detail-item {
+    display: flex;
+    margin-bottom: 8px;
+  }
+  
+  .detail-item dt {
+    font-weight: bold;
+    width: 40%;
+    padding-right: 10px;
+  }
+  
+  .detail-item dd {
+    margin: 0;
+    width: 60%;
+  }
+  
+  /* High contrast mode support */
+  @media (forced-colors: active) {
+    .booking-slot.selected {
+      border: 2px solid SelectedItem;
+      background-color: SelectedItem;
+      color: SelectedItemText;
+    }
+    
+    .reserve-button {
+      border: 2px solid ButtonText;
+    }
+  }
+  
+  /* Skip link for keyboard navigation */
+  .skip-link {
     position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  
+  .skip-link:focus {
+    position: fixed;
     top: 0;
     left: 0;
-    cursor: pointer;
+    width: auto;
+    height: auto;
+    padding: 15px;
+    background: #F4CE14;
+    color: #333;
+    font-weight: bold;
+    z-index: 1000;
   }
   
-  /* Responsive adjustments */
-  @media (max-width: 480px) {
-    .form-field {
+  /* Focus visible utility class */
+  .focus-visible {
+    outline: 3px solid #F4CE14 !important;
+    outline-offset: 2px !important;
+  }
+  
+  /* Add spacing between form fields for better visual grouping */
+  .form-field + .form-field {
+    margin-top: 24px;
+  }
+  
+  /* Responsive design adjustments */
+  @media (max-width: 768px) {
+    .detail-item {
       flex-direction: column;
-      align-items: flex-start;
     }
     
-    .form-field label {
-      margin-bottom: 6px;
-    }
-    
-    .date-input-container,
-    .form-field input,
-    .form-field select,
-    .form-field textarea {
+    .detail-item dt,
+    .detail-item dd {
       width: 100%;
     }
   }

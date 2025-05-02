@@ -16,40 +16,78 @@ function ConfirmedBooking() {
     return date.toLocaleDateString('en-US', options);
   };
 
+  // Handle navigation functions with keyboard support
+  const handleModify = () => {
+    navigate('/reservations');
+  };
+
+  const handleHome = () => {
+    navigate('/');
+  };
+
   return (
-    <div className="confirmation-container">
-      <h1>Reservation Made!</h1>
-      <p className="welcome-message">We can't wait to serve you!</p>
-      <p className="confirmation-id">Confirmation #{confirmationId}</p>
-      
-      <h2>Reservation Details</h2>
-      
-      <div className="reservation-details">
-        <p><strong>Date:</strong> {formatDate(bookingData.date)} @ {bookingData.time}</p>
-        <p><strong>Guests:</strong> {bookingData.guests} Guests</p>
-        <p><strong>Special Requests:</strong> {bookingData.specialRequests || 'None'}</p>
-        
-        <p className="email-notification">
-          A confirmation has also been sent to your email.
+    <main>
+      <section 
+        className="confirmation-container" 
+        aria-labelledby="confirmation-heading"
+      >
+        <header>
+          <h1 id="confirmation-heading">Reservation Made!</h1>
+          <p className="welcome-message" role="status">We can't wait to serve you!</p>
+        </header>
+
+        <p className="confirmation-id" aria-live="polite">
+          Confirmation #{confirmationId}
         </p>
-      </div>
-      
-      <div className="button-container">
-        <button 
-          onClick={() => navigate('/booking')}
-          className="action-button"
-        >
-          MODIFY
-        </button>
         
-        <button 
-          onClick={() => navigate('/')}
-          className="action-button"
+        <section aria-labelledby="details-heading">
+          <h2 id="details-heading">Reservation Details</h2>
+          
+          <dl className="reservation-details">
+            <div className="detail-item">
+              <dt>Date:</dt>
+              <dd>{formatDate(bookingData.date)} @ {bookingData.time}</dd>
+            </div>
+            
+            <div className="detail-item">
+              <dt>Guests:</dt>
+              <dd>{bookingData.guests} Guests</dd>
+            </div>
+            
+            <div className="detail-item">
+              <dt>Special Requests:</dt>
+              <dd>{bookingData.specialRequests || 'None'}</dd>
+            </div>
+          </dl>
+          
+          <p className="email-notification" aria-live="polite">
+            A confirmation has also been sent to your email.
+          </p>
+        </section>
+        
+        <div 
+          className="button-container"
+          role="group"
+          aria-label="Booking actions"
         >
-          HOME
-        </button>
-      </div>
-    </div>
+          <button 
+            onClick={handleModify}
+            className="action-button"
+            aria-label="Modify your reservation"
+          >
+            MODIFY
+          </button>
+          
+          <button 
+            onClick={handleHome}
+            className="action-button"
+            aria-label="Return to home page"
+          >
+            HOME
+          </button>
+        </div>
+      </section>
+    </main>
   );
 }
 

@@ -17,7 +17,7 @@ function HomePage() {
             focused on traditional recipes served with a modern
             twist.
           </p>
-          <Link to="/booking">
+          <Link to="/reservations">
             <button className="reserve-button">Reserve a Table</button>
           </Link>
         </div>
