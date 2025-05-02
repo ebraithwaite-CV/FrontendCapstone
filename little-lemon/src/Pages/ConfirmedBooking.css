@@ -1,0 +1,71 @@
+/* ConfirmedBooking.css */
+.confirmation-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    text-align: center;
+  }
+  
+  .confirmation-container h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-family: 'Markazi Text', serif;
+  }
+  
+  .confirmation-container .welcome-message {
+    color: #495E57;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-family: 'Karla', sans-serif;
+  }
+  
+  .confirmation-container .confirmation-id {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .confirmation-container h2 {
+    font-size: 20px;
+    color: #495E57;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-family: 'Markazi Text', serif;
+  }
+  
+  .reservation-details {
+    text-align: left;
+    padding: 0 20px;
+    line-height: 1.6;
+  }
+  
+  .email-notification {
+    margin-top: 20px;
+    font-style: italic;
+    color: #666;
+  }
+  
+  .button-container {
+    margin-top: 30px;
+  }
+  
+  .action-button {
+    background-color: #F4CE14;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Karla', sans-serif;
+    transition: background-color 0.3s;
+  }
+  
+  .action-button:hover {
+    background-color: #E9C213;
+  }

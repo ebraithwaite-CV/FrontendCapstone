@@ -1,93 +1,127 @@
-import React from 'react';
+import React, { useReducer } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import HomePage from './Pages/HomePage';
+import BookingPage from './Pages/BookingPage';
+import AboutPage from './Pages/AboutPage';
+import MenuPage from './Pages/MenuPage';
+import OrderOnlinePage from './Pages/OrderOnlinePage';
+import LoginPage from './Pages/LoginPage';
+import ConfirmedBooking from './Pages/ConfirmedBooking'; // Import the new component
+import { fetchAPI, submitAPI } from './api';
 import './Main.css';
-import Bruschetta from './Assets/Bruschetta.jpg'; 
-import GreekSalad from './Assets/GreekSalad.jpg';
-import BruschettaTwo from './Assets/BruschettaTwo.jpg';
-import LemonDessert from './Assets/LemonDessert.png';
+
+export const initializeTimes = () => {
+  const today = new Date();
+  
+  // Try to fetch available times from the API
+  try {
+    return fetchAPI(today);
+  } catch (error) {
+    console.error("Error fetching initial times:", error);
+    // Fallback times in case the API call fails
+    return [
+      '5:15 pm ET',
+      '5:45 pm ET',
+      '6:15 pm ET',
+      '6:45 pm ET',
+      '7:15 pm ET',
+      '7:45 pm ET',
+      '8:15 pm ET',
+      '8:45 pm ET'
+    ];
+  }
+};
+
+// Reducer function now uses fetchAPI to get available times based on selected date
+export const availableTimesReducer = (state, action) => {
+  switch(action.type) {
+    case 'UPDATE_TIMES':
+      try {
+        
+        const selectedDate = action.payload;
+       
+        const dateObj = typeof selectedDate === 'string' 
+          ? new Date(selectedDate) 
+          : selectedDate;
+        
+        return fetchAPI(dateObj);
+      } catch (error) {
+        console.error("Error updating times:", error);
+        return state;
+      }
+    default:
+      return state;
+  }
+};
+
+// Function to submit the booking form data
+export const submitForm = (formData) => {
+  try {
+    return submitAPI(formData);
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    return false;
+  }
+};
 
 function Main() {
+  const navigate = useNavigate(); // Add useNavigate hook
+  const [availableTimes, dispatchAvailableTimes] = useReducer(
+    availableTimesReducer,
+    [],
+    initializeTimes
+  );
+
+  // Function to update times based on date
+  const updateTimes = (date) => {
+    dispatchAvailableTimes({ type: 'UPDATE_TIMES', payload: date });
+  };
+
+  // Function to handle form submission
+  const submitBooking = (formData) => {
+    const success = submitForm(formData);
+    
+    if (success) {
+      // Generate a random confirmation ID
+      const confirmationId = Math.random().toString(36).substring(2, 6) + '-' +
+                            Math.random().toString(36).substring(2, 6) + '-' +
+                            Math.random().toString(36).substring(2, 6) + '-' +
+                            Math.random().toString(36).substring(2, 6);
+      
+      // Navigate to confirmation page with the booking data
+      navigate('/confirmed-booking', { 
+        state: { 
+          bookingData: formData,
+          confirmationId: confirmationId
+        } 
+      });
+      
+      return true;
+    }
+    
+    return false;
+  };
+
   return (
     <main className="main">
-      <section className="hero">
-        <div className="hero-content">
-          <h1 className="restaurant-name">Little Lemon</h1>
-          <h2 className="restaurant-location">Chicago</h2>
-          <p className="restaurant-description">
-            We are a family owned Mediterranean restaurant, 
-            focused on traditional recipes served with a modern
-            twist.
-          </p>
-          <button className="reserve-button">Reserve a Table</button>
-        </div>
-        <div className="hero-image">
-          <img src={Bruschetta} alt="Bruschetta appetizers" />
-        </div>
-      </section>
-
-      <section className="specials">
-        <div className="specials-header">
-          <h2>This weeks specials!</h2>
-          <button className="menu-button">Online Menu</button>
-        </div>
-        
-        <div className="specials-cards">
-          <div className="special-card">
-            <img src={GreekSalad} alt="Greek salad" />
-            <div className="special-content">
-              <div className="special-title-price">
-                <h3>Greek salad</h3>
-                <p className="price">$12.99</p>
-              </div>
-              <p className="special-description">
-                The famous greek salad of crispy lettuce, peppers, olives
-                and our Chicago style feta cheese, garnished with
-                crunchy garlic and rosemary croutons.
-              </p>
-              <div className="order-link">
-                <p>Order a delivery</p>
-                <span className="delivery-icon">🛵</span>
-              </div>
-            </div>
-          </div>
-          
-          <div className="special-card">
-            <img src={BruschettaTwo} alt="Bruschetta" />
-            <div className="special-content">
-              <div className="special-title-price">
-                <h3>Bruschetta</h3>
-                <p className="price">$5.99</p>
-              </div>
-              <p className="special-description">
-                Our bruschetta is made from grilled bread that has been
-                smeared with garlic and seasoned with salt and olive oil.
-              </p>
-              <div className="order-link">
-                <p>Order a delivery</p>
-                <span className="delivery-icon">🛵</span>
-              </div>
-            </div>
-          </div>
-          
-          <div className="special-card">
-            <img src={LemonDessert} alt="Lemon Dessert" />
-            <div className="special-content">
-              <div className="special-title-price">
-                <h3>Lemon Dessert</h3>
-                <p className="price">$5.00</p>
-              </div>
-              <p className="special-description">
-                This comes straight from grandma's recipe book, every
-                last ingredient has been sourced and is as authentic
-                as can be imagined.
-              </p>
-              <div className="order-link">
-                <p>Order a delivery</p>
-                <span className="delivery-icon">🛵</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route 
+          path="/reservations" 
+          element={
+            <BookingPage 
+              availableTimes={availableTimes} 
+              updateTimes={updateTimes}
+              submitBooking={submitBooking}
+            />
+          } 
+        />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/menu" element={<MenuPage />} />
+        <Route path="/order-online" element={<OrderOnlinePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/confirmed-booking" element={<ConfirmedBooking />} />
+      </Routes>
     </main>
   );
 }
