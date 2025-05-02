@@ -6,19 +6,17 @@ import AboutPage from './Pages/AboutPage';
 import MenuPage from './Pages/MenuPage';
 import OrderOnlinePage from './Pages/OrderOnlinePage';
 import LoginPage from './Pages/LoginPage';
-import ConfirmedBooking from './Pages/ConfirmedBooking'; // Import the new component
+import ConfirmedBooking from './Pages/ConfirmedBooking';
 import { fetchAPI, submitAPI } from './api';
 import './Main.css';
 
 export const initializeTimes = () => {
   const today = new Date();
   
-  // Try to fetch available times from the API
   try {
     return fetchAPI(today);
   } catch (error) {
     console.error("Error fetching initial times:", error);
-    // Fallback times in case the API call fails
     return [
       '5:15 pm ET',
       '5:45 pm ET',
@@ -32,7 +30,6 @@ export const initializeTimes = () => {
   }
 };
 
-// Reducer function now uses fetchAPI to get available times based on selected date
 export const availableTimesReducer = (state, action) => {
   switch(action.type) {
     case 'UPDATE_TIMES':
@@ -54,7 +51,6 @@ export const availableTimesReducer = (state, action) => {
   }
 };
 
-// Function to submit the booking form data
 export const submitForm = (formData) => {
   try {
     return submitAPI(formData);
@@ -65,30 +61,26 @@ export const submitForm = (formData) => {
 };
 
 function Main() {
-  const navigate = useNavigate(); // Add useNavigate hook
+  const navigate = useNavigate(); 
   const [availableTimes, dispatchAvailableTimes] = useReducer(
     availableTimesReducer,
     [],
     initializeTimes
   );
 
-  // Function to update times based on date
   const updateTimes = (date) => {
     dispatchAvailableTimes({ type: 'UPDATE_TIMES', payload: date });
   };
 
-  // Function to handle form submission
   const submitBooking = (formData) => {
     const success = submitForm(formData);
     
     if (success) {
-      // Generate a random confirmation ID
       const confirmationId = Math.random().toString(36).substring(2, 6) + '-' +
                             Math.random().toString(36).substring(2, 6) + '-' +
                             Math.random().toString(36).substring(2, 6) + '-' +
                             Math.random().toString(36).substring(2, 6);
       
-      // Navigate to confirmation page with the booking data
       navigate('/confirmed-booking', { 
         state: { 
           bookingData: formData,

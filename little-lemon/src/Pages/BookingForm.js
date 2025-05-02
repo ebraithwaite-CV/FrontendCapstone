@@ -13,7 +13,6 @@ import './BookingForm.css';
 function BookingForm({ availableTimes, updateTimes, submitBooking }) {
   const navigate = useNavigate();
   
-  // State variables for each form field
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [guests, setGuests] = useState('4 Guests');
@@ -23,7 +22,6 @@ function BookingForm({ availableTimes, updateTimes, submitBooking }) {
   const [specialRequests, setSpecialRequests] = useState('');
   const [initialized, setInitialized] = useState(false);
   
-  // Form validation states
   const [touchedFields, setTouchedFields] = useState({
     date: false,
     time: false,
@@ -42,7 +40,6 @@ function BookingForm({ availableTimes, updateTimes, submitBooking }) {
     email: ''
   });
   
-  // Available guest options
   const guestOptions = [
     '1 Guest',
     '2 Guests',
@@ -54,7 +51,6 @@ function BookingForm({ availableTimes, updateTimes, submitBooking }) {
     '8 Guests'
   ];
 
-  // One-time initialization on component mount
   useEffect(() => {
     if (!initialized) {
       const today = new Date();
@@ -65,14 +61,12 @@ function BookingForm({ availableTimes, updateTimes, submitBooking }) {
     }
   }, [initialized, updateTimes]);
 
-  // Update time selection when available times change
   useEffect(() => {
     if (availableTimes.length > 0 && !time) {
       setTime(availableTimes[0]);
     }
   }, [availableTimes, time]);
   
-  // Run validation when field value changes
   useEffect(() => {
     if (touchedFields.date) {
       setFormErrors(prev => ({ ...prev, date: validateDate(date) }));
@@ -109,12 +103,10 @@ function BookingForm({ availableTimes, updateTimes, submitBooking }) {
     }
   }, [email, touchedFields.email]);
   
-  // Handle field blur to mark fields as touched
   const handleBlur = (field) => {
     setTouchedFields(prev => ({ ...prev, [field]: true }));
   };
   
-  // Check if the form is valid
   const isFormValid = () => {
     const errors = {
       date: validateDate(date),
@@ -125,10 +117,8 @@ function BookingForm({ availableTimes, updateTimes, submitBooking }) {
       email: validateEmail(email)
     };
     
-    // Update the errors state
     setFormErrors(errors);
     
-    // Mark all fields as touched
     setTouchedFields({
       date: true,
       time: true,
@@ -138,17 +128,13 @@ function BookingForm({ availableTimes, updateTimes, submitBooking }) {
       email: true
     });
     
-    // Return true if no errors
     return !Object.values(errors).some(error => error !== '');
   };
 
-  // Form submission handler
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Validate all fields before submission
     if (!isFormValid()) {
-      // Scroll to the first error
       const firstErrorField = document.querySelector('.error-message');
       if (firstErrorField) {
         firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -156,10 +142,8 @@ function BookingForm({ availableTimes, updateTimes, submitBooking }) {
       return;
     }
     
-    // Parse the number of guests from the string
     const numGuests = parseInt(guests.split(' ')[0]);
     
-    // Create form data object
     const formData = {
       date,
       time,
@@ -170,16 +154,13 @@ function BookingForm({ availableTimes, updateTimes, submitBooking }) {
       specialRequests
     };
     
-    // Submit form data using the prop function
     const success = submitBooking(formData);
     
     if (!success) {
       alert('Something went wrong. Please try again.');
     }
-    // No need for else block as submitBooking will handle navigation on success
   };
 
-  // Handle date change
   const handleDateChange = (e) => {
     const newDate = e.target.value;
     setDate(newDate);
@@ -188,10 +169,9 @@ function BookingForm({ availableTimes, updateTimes, submitBooking }) {
     updateTimes(dateObj);
   };
 
-  // Handle keyboard navigation for time slots
   const handleTimeSlotKeyDown = (e, availableTime) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault(); // Prevent page scroll on space key
+      e.preventDefault();
       setTime(availableTime);
       setTouchedFields(prev => ({ ...prev, time: true }));
     }

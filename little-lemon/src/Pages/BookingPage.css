@@ -1,12 +1,10 @@
-/* BookingPage.css */
-
 .booking-page {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
   }
   
-  /* Center text in hero section */
+
   .booking-hero {
     text-align: center;
     margin-bottom: 40px;
@@ -25,7 +23,7 @@
     margin: 0 auto;
   }
   
-  /* Style the form container */
+
   .booking-form-container {
     margin-bottom: 40px;
   }
@@ -37,7 +35,7 @@
     font-size: 1.8rem;
   }
   
-  /* Style the information section */
+
   .booking-info {
     background-color: #f8f8f8;
     border-radius: 8px;
@@ -59,7 +57,6 @@
     color: #333;
   }
   
-  /* Responsive adjustments */
   @media (max-width: 768px) {
     .booking-hero h1 {
       font-size: 2rem;
